@@ -24,7 +24,7 @@ class Compile {
 
   compileElement(fragment) {
     // 获取 fragment.childNodes
-    console.log(1)
+    console.log(2)
     let childNodes = fragment.childNodes;
     Array.from(childNodes).forEach(node => {
       console.log(node, node.nodeType)
