@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+  <div id="app">
+    <p> {{name}} </p>
+    <p> {{name}} </p>
+    <p k-text="name"></p>
+    <p> {{age}} </p>
+    <input type="text" k-model="name">
+    <button @click="changeName">点我</button>
+    <div k-html="buttonStr"></div>
+  </div>
+  <script src='./kaikeba-compile.js'></script>
+  <script src='./kaikeba-vue.js'></script>
+  <script>
+    let vm = new KVue({
+      el:"#app",
+      data:{
+
+        name:'开课吧',
+        age:5,
+        buttonStr:'<button> 雷猴啊</button>'
+      },
+      created(){
+        setTimeout(()=>{
+          this.name='我是create修改的'
+        },2000)
+      },
+      methods:{
+        changeName(){
+          // alert('哈哈')
+          this.name = 'vuejs真不错'
+          this.age = 1
+        }
+      }
+    })
+    // vm.name='xx'
+
+    // const store = new KVuex({
+    //   state:{
+
+    //   },
+    //   action:{
+
+
+    //   }
+    //   mutations:{
+
+    //   }
+    // })
+    // new KVue({
+    //   el,
+    //   store
+    // })
+
+    // {
+    //   '/movie':Movie
+    //   '/book':Book
+    // }
+  </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手写一个 vue </title>
+</head>
+<body>
+    <div id="app">
+        <h3>这是一个文本节点</h3>
+        <p>{{text1}}</p>
+        <p>{{foo.bar}}</p>
+
+        <h3>这里模拟指令，绑定属性和事件</h3>
+        <div d-html="text2">变身前</div>
+        <button @click="onClick">欢迎</button>
+
+        <h3>这里模拟双向数据绑定</h3>
+        <div>
+            <input type="text" d-model="text1">
+        </div>
+    </div>
+    <script src="./d-vue.js"></script>
+    <script src="./compile.js"></script>
+    <script>
+        var vm = new DVue({
+            el:"#app",
+            data:{
+                text1:"test1",
+                text2:"<button>变身后的小按钮啊</button>",
+                // 对象
+                foo:{
+                    bar:'baz'
+                },
+                // 模板中没用到的数据
+                text3:""
+            },
+            methods:{
+                onClick(){
+                    alert("哈喽啊！！")
+                }
+            }
+        })
+
+        // console.log(vm.$data.foo.bar,"============")
+        // vm.$data.foo.bar = "test1更新了"
+        // console.log(vm.$data.foo.bar,"============")
+    </script>
+    
+</body>
+</html>

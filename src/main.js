@@ -18,7 +18,6 @@ import {
 Vue.use(Dialog)
 
 // 创建 this.$createHello API
-
 createAPI(Vue, Hello, ['hello', 'wa'], false)
 
 Vue.config.productionTip = false
