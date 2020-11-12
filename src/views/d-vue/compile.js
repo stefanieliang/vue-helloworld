@@ -11,6 +11,7 @@ class Compile {
   nodeToFragment(node) {
     let fragment = document.createDocumentFragment();
     let child;
+
     // 获取第一个节点 node.firstChild
     while (child = node.firstChild) {
       // append 是转移，从 node 转移到 fragment
