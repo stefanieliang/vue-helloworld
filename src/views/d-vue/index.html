@@ -8,12 +8,12 @@
 <body>
     <div id="app">
         <h3>这是一个文本节点</h3>
-        <p>{{text1}}</p>
-        <p>{{foo.bar}}</p>
+        {{text1}}
 
         <h3>这里模拟指令，绑定属性和事件</h3>
+        <div d-text="text1"></div>
         <div d-html="text2">变身前</div>
-        <button @click="onClick">欢迎</button>
+        <button @click="clickHandler">欢迎</button>
 
         <h3>这里模拟双向数据绑定</h3>
         <div>
@@ -36,7 +36,7 @@
                 text3:""
             },
             methods:{
-                onClick(){
+                clickHandler(){
                     alert("哈喽啊！！")
                 }
             }

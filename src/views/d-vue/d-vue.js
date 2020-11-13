@@ -5,16 +5,18 @@ class DVue {
     this.$methods = options.methods
 
     this.observe(this.$data);
-    new Watcher();
+    // new Watcher();
     new Compile(options.el, this)
   }
 
   observe(data) {
-    if (data == null || typeof data !== 'object') {
+    if (!data || typeof data !== 'object') {
       return
     }
-    Object.keys(data).forEach(v => {
-      this.defineReactive(data, v, data[v])
+    Object.keys(data).forEach(key => {
+      this.proxyData(key)
+
+      this.defineReactive(data, key, data[key])
     })
   }
 
@@ -37,6 +39,19 @@ class DVue {
         }
         value = newVal;
         dep.notify()
+      }
+    })
+  }
+
+  proxyData(key) {
+    Object.defineProperty(this, key, {
+      enumerable: true,
+      configurable: true,
+      get() {
+        return this.$data[key]
+      },
+      set(newVal) {
+        this.$data[key] = newVal;
       }
     })
   }
@@ -67,10 +82,22 @@ class Dep {
 
 // 监听器
 class Watcher {
-  constructor() {
-    Dep.target = this;
+  constructor(vm, key, cb) {
+    this.vm = vm;
+    this.key = key;
+    this.cb = cb;
+    this.value = this.get()
+  }
+  get() {
+    // 收集依赖
+    Dep.target = this
+    // 读数据了，自动收集了依赖
+    let value = this.vm[this.key]
+    Dep.target = null
+    return value
   }
   update() {
-    console.log("依赖要更新啦~~~~")
+    this.value = this.get()
+    this.cb.call(this.vm, this.value)
   }
 }
